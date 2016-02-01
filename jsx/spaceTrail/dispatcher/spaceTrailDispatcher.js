@@ -6,10 +6,11 @@ var assign = require('object-assign');
 
 var SpaceTrailDispatcher = assign(new Dispatcher(), {
 
-  handleViewAction(action) {
+  handleViewAction (action) {
     var payload = {
       action: action
     };
+
     this.dispatch(payload);
   }
 
