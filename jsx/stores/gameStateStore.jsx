@@ -54,7 +54,7 @@ var getNewGameState = function () {
 			name: "",
 			background: ""
 		},
-		partySize: 3, // this includes the player
+		partySize: 0, // this includes the player
 		ship: {
 			name: ""
 		},	

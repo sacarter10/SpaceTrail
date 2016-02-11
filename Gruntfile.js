@@ -18,8 +18,7 @@ module.exports = function(grunt) {
              ]
           },
           files: {
-             "./public/javascripts/spaceTrail.js": ["./jsx/spaceTrail/app.jsx"],
-             "./public/javascripts/planets.js": ["./jsx/planets/planets.jsx"]
+             "./public/javascripts/spaceTrail.js": ["./jsx/app.jsx"],
           }
        }
     },
@@ -44,7 +43,7 @@ module.exports = function(grunt) {
 				tasks: ['sass']
 			},
 			scripts: {
-	      files: ["./jsx/spaceTrail/*", "./jsx/spaceTrail/*/*", "./jsx/planets/*.jsx"],
+	      files: ["./jsx/*", "./jsx/*/*"],
 	      tasks: ['browserify']
 	    }
 		}

@@ -1,12 +1,10 @@
 var Dispatcher = require('flux').Dispatcher;
 var Constants = require('../constants/constants.js');
-var assign = require('object-assign');
+var objectAssign = require('object-assign');
 
-var assign = require('object-assign');
+var SpaceTrailDispatcher = objectAssign(new Dispatcher(), {
 
-var SpaceTrailDispatcher = assign(new Dispatcher(), {
-
-  handleViewAction (action) {
+  handleViewAction: function (action) {
     var payload = {
       action: action
     };
