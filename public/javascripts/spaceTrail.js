@@ -27,6 +27,8 @@ var ProgressBar = require('./components/progressBar.jsx');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var isNode = typeof window === 'undefined';
+
 var App = React.createClass({
   displayName: 'App',
 
@@ -53,7 +55,11 @@ var App = React.createClass({
   }
 });
 
-ReactDOM.render(React.createElement(App, null), document.getElementById("space-trail"));
+if (isNode) {
+  module.exports = App;
+} else {
+  ReactDOM.render(React.createElement(App, null), document.getElementById("space-trail"));
+}
 
 },{"./components/dashboard.jsx":3,"./components/progressBar.jsx":4,"./components/slides.jsx":5,"./stores/gameStateStore.jsx":12,"react":176,"react-dom":20}],3:[function(require,module,exports){
 var React = require('react');
@@ -221,16 +227,15 @@ module.exports = {
 },{"keymirror":18}],7:[function(require,module,exports){
 var Dispatcher = require('flux').Dispatcher;
 var Constants = require('../constants/constants.js');
-var assign = require('object-assign');
+var objectAssign = require('object-assign');
 
-var assign = require('object-assign');
+var SpaceTrailDispatcher = objectAssign(new Dispatcher(), {
 
-var SpaceTrailDispatcher = assign(new Dispatcher(), {
-
-  handleViewAction(action) {
+  handleViewAction: function (action) {
     var payload = {
       action: action
     };
+
     this.dispatch(payload);
   }
 
@@ -484,7 +489,6 @@ module.exports = {
 		handleInput: function (gameState, input) {
 			this.tempVars.timesSeen++;
 			var firstLetter = input[0].toLowerCase();
-			console.log(this.tempVars.timesSeen);
 
 			if (this.tempVars.timesSeen > 3) {
 				gameState.currentSlide = "2end";
@@ -1505,7 +1509,7 @@ var getNewGameState = function () {
 			name: "",
 			background: ""
 		},
-		partySize: 3, // this includes the player
+		partySize: 0, // this includes the player
 		ship: {
 			name: ""
 		},

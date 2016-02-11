@@ -5,6 +5,8 @@ var ProgressBar = require('./components/progressBar.jsx');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var isNode = (typeof window === 'undefined'); 
+
 var App = React.createClass({
 
   _onChange: function () {
@@ -28,6 +30,8 @@ var App = React.createClass({
  	} 
  });
 
-ReactDOM.render(<App />, document.getElementById("space-trail"));	
-
-
+if (isNode) {
+  module.exports = App;
+} else {
+  ReactDOM.render(<App />, document.getElementById("space-trail")); 
+}

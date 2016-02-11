@@ -165,7 +165,6 @@ module.exports = {
 		handleInput: function (gameState, input) {
 			this.tempVars.timesSeen++;
 			var firstLetter = input[0].toLowerCase();
-			console.log(this.tempVars.timesSeen);
 
 			if (this.tempVars.timesSeen > 3) {
 				gameState.currentSlide = "2end";

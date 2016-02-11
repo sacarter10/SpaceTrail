@@ -1,8 +1,8 @@
 To run the server locally: "node server.js"  
-To compile sass to css one time: "grunt sass"  
-To watch for changes to sass: "grunt watch"  
+To compile sass and jsx one time: "grunt"  
+To compile and then watch for changes to sass/jsx: "grunt caw"  
 
-Live here: http://lustforlassitude.com/ 
+Live here: http://lustforlassitude.com/galactic-opera/ 
 
 TODO: 
 * When searching dead ship -- find more things w/ more crew members, but risk death

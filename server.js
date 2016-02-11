@@ -7,7 +7,7 @@ var express   = require('express'),
     cons      = require('consolidate'),
     React     = require('react'),
     ReactDOM  = require('react-dom/server'),
-    SpaceTrail   = require('./jsx/spaceTrail/app.jsx');
+    SpaceTrail  = require('./jsx/app.jsx');
 
 //use handlebars as a templating engine 
 app.set('view engine', 'hbs');
@@ -16,10 +16,11 @@ app.use(express.bodyParser());
 
 // react server-side rendering stuff
 //var PlanetComponent = React.createFactory(Planets);
+var SpaceTrailComponent = React.createFactory(SpaceTrail);
 
-app.get('/space-trail', function(req, res) {
+app.get('/', function(req, res) {
   res.render('space-trail.hbs', {
-   // spaceTrail: ReactDOM.renderToString(SpaceTrailComponent())
+    spaceTrail: ReactDOM.renderToString(SpaceTrailComponent())
   });
 });
 
