@@ -1,14 +1,11 @@
 var React = require('react');
 var ActionCreator = require('../actions/gameStateActionCreators');
+var MultipleChoiceInput = require('./multipleChoice.jsx');
+var TextInput = require('./textInput.jsx')
 
 module.exports = React.createClass({
-	handleSubmit: function (e) {
-		e.preventDefault();
-
-		var input = document.getElementById('user-input');
-		ActionCreator.handleInput(input.value);
-
-		input.value = ''; // clear away old input		
+	handleResponse: function (resp) {
+		ActionCreator.handleInput(resp);
 	},
 
 	handleRestart: function (e) {
@@ -18,18 +15,25 @@ module.exports = React.createClass({
 
 	render: function () {
 		var message = this.props.currentSlide.message;
-		var placeholderText = this.props.currentSlide.inputPlaceholder || "Type your response.";
 		var day = this.props.gameState.lengthOfTrip - this.props.gameState.daysToArrival;
-
 		var dayDisplay = day > 0 ? ("Day " + day) : null;
 
+		var userInput;
+
+		if (this.props.currentSlide.options) {
+			userInput = <MultipleChoiceInput handleClick={ this.handleResponse } options={ this.props.currentSlide.options }/>;	
+		} else {
+			userInput = <TextInput handleResponse={ this.handleResponse } />
+		}
+
 		return <div className="game-text">
-			<form id="game-input" onSubmit={ this.handleSubmit }>
+			<div id="game-input">
 				<p>{ dayDisplay }</p>
 				{ message }
-				<input id="user-input" autoFocus="true" type="text" placeholder={ placeholderText } />
-			</form>
-			<button id="saveGame" onClick={ this.handleRestart }>Restart Game</button>
+
+				{ userInput }
+			</div>
+			<button id="restartGame" onClick={ this.handleRestart }>Restart Game</button>
 		</div>
 	}
 });
