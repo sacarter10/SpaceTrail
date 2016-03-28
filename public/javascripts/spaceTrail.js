@@ -354,11 +354,6 @@ module.exports = {
 					'  is moving faster than you and will use ',
 					gallonsToCatchUp,
 					' gallons of fuel to catch up to and dock with.'
-				),
-				React.createElement(
-					'p',
-					null,
-					'Do you (r)eply, (d)ock, or (c)ontinue on your way?'
 				)
 			);
 		},
@@ -375,7 +370,8 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [{ code: "R", text: "Reply" }, { code: "D", text: "Dock" }, { code: "C", text: "Continue on your way" }]
 	},
 	"1r": {
 		message: function (gameState) {
@@ -386,11 +382,6 @@ module.exports = {
 					'p',
 					null,
 					'There is no reply from the ship. The message continues to loop.'
-				),
-				React.createElement(
-					'p',
-					null,
-					'Do you (d)ock, or (c)ontinue?'
 				)
 			);
 		},
@@ -404,7 +395,8 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [{ code: "D", text: "Dock" }, { code: "C", text: "Continue on your way" }]
 	},
 	"1c": {
 		message: function () {
@@ -419,7 +411,8 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 40);
 
 			return gameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue on your way" }]
 	},
 	"1d": {
 		message: function (gameState) {
@@ -500,6 +493,7 @@ module.exports = {
 
 			return updatedGameState;
 		},
+		options: [{ code: "C", text: "Continue" }],
 		tempVars: {}
 	},
 	"2": {
@@ -511,11 +505,6 @@ module.exports = {
 					'p',
 					null,
 					'You hear a knocking from inside one of the bulkheads. It lasts for a few seconds then is silent.'
-				),
-				React.createElement(
-					'p',
-					null,
-					'Do you (k)eep listening, (d)ismantle the bulkhead, or (i)gnore it?'
 				)
 			);
 		},
@@ -534,7 +523,8 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [{ code: "K", text: "Keep listening" }, { code: "D", text: "Dismantle the bulkhead" }, { code: "I", text: "Ignore it" }]
 	},
 	"2again": {
 		message: function (gameState) {
@@ -1170,13 +1160,7 @@ module.exports = {
 			gameState.currentSlide = 4;
 
 			return gameState;
-		},
-		options: [{ code: 1,
-			text: "One" }, { code: 2,
-			text: "Two" }, { code: 3,
-			text: "Three" }, { code: 4,
-			text: "Four" }, { code: 5,
-			text: "Five" }]
+		}
 	},
 	4: {
 		message: function () {
@@ -1326,25 +1310,66 @@ module.exports = {
 				'span',
 				null,
 				React.createElement(
-					'p',
+					'h4',
 					null,
-					'What would you like to purchase?'
+					'Prices'
 				),
 				React.createElement(
 					'ul',
-					{ className: 'lettered-list' },
+					null,
 					React.createElement(
 						'li',
 						null,
-						'Water, ',
-						gameState.currentSupplyPrices.water,
+						React.createElement(
+							'strong',
+							null,
+							'Food:'
+						),
+						' ',
+						gameState.currentSupplyPrices.food,
+						' / pound'
+					),
+					React.createElement(
+						'li',
+						null,
+						React.createElement(
+							'strong',
+							null,
+							'Oxygen:'
+						),
+						' ',
+						gameState.currentSupplyPrices.oxygen,
+						' / liter'
+					),
+					React.createElement(
+						'li',
+						null,
+						React.createElement(
+							'strong',
+							null,
+							'Water:'
+						),
+						' ',
+						gameState.currentSupplyPrices.fuel,
 						' / gallon'
 					),
 					React.createElement(
 						'li',
 						null,
-						'I\'m happy with what I\'ve purchased.'
+						React.createElement(
+							'strong',
+							null,
+							'Fuel:'
+						),
+						' ',
+						gameState.currentSupplyPrices.water,
+						' / gallon'
 					)
+				),
+				React.createElement(
+					'p',
+					null,
+					'What would you like to purchase?'
 				)
 			);
 		},
@@ -1358,9 +1383,7 @@ module.exports = {
 
 			return gameState;
 		},
-		options: [{ code: "A", text: function () {
-				return "Food" + gameState.currentSupplyPrices.food + "/ pound";
-			} }(), { code: "B", text: "Oxygen, { gameState.currentSupplyPrices.oxygen } / liter" }, { code: "C", text: "Fuel, { gameState.currentSupplyPrices.fuel } / gallon" }]
+		options: [{ code: "A", text: "Food" }, { code: "B", text: "Oxygen" }, { code: "C", text: "Fuel" }, { code: "D", text: "Water" }, { code: "E", text: "I'm happy with what I've purchased." }]
 	},
 	"8a": {
 		message: function () {
@@ -1454,7 +1477,8 @@ module.exports = {
 			gameState.currentSlide += 1;
 
 			return gameState;
-		}
+		},
+		options: [{ code: "A", text: "Continue" }]
 	},
 	10: {
 		message: function (gameState, input) {
@@ -1479,7 +1503,8 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 33);
 
 			return updatedGameState;
-		}
+		},
+		options: [{ code: "A", text: "Continue" }]
 	}
 };
 

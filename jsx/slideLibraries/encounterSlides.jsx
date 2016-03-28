@@ -21,9 +21,6 @@ module.exports = {
 					The message loops. From the transmission you determine that the <em>{ distressedShip }</em>&nbsp; 
 					is moving faster than you and will use { gallonsToCatchUp } gallons of fuel to catch up to and dock with.
 				</p>
-				<p>
-					Do you (r)eply, (d)ock, or (c)ontinue on your way?
-				</p>
 			</span>
 		},
 
@@ -39,7 +36,12 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "R", text: "Reply"},
+			{ code: "D", text: "Dock"},
+			{ code: "C", text: "Continue on your way"}
+		]
 	},
 	"1r": {
 		message: function (gameState) {
@@ -47,9 +49,6 @@ module.exports = {
 				<p>
 					There is no reply from the ship. The message continues to loop.
 				</p>
-				<p>
-					Do you (d)ock, or (c)ontinue?
-				</p> 
 			</span>
 		},
 		handleInput: function (gameState, input) {
@@ -62,7 +61,11 @@ module.exports = {
 			}
 
 			return gameState;
-		} 
+		},
+		options: [
+			{ code: "D", text: "Dock"},
+			{ code: "C", text: "Continue on your way"}
+		]
 	},
 	"1c": {
 		message: function () {
@@ -73,7 +76,10 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 40);
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue on your way"}
+		]
 	}, 
 	"1d": {
 		message: function (gameState) {
@@ -122,6 +128,9 @@ module.exports = {
 
 			return updatedGameState;
 		},
+		options: [
+			{ code: "C", text: "Continue"}
+		],
 		tempVars: {}
 	},
 	"2": {
@@ -129,9 +138,6 @@ module.exports = {
 			return <span>
 				<p>
 					You hear a knocking from inside one of the bulkheads. It lasts for a few seconds then is silent.
-				</p>
-				<p>
-					Do you (k)eep listening, (d)ismantle the bulkhead, or (i)gnore it?
 				</p>
 			</span>
 		},
@@ -149,7 +155,12 @@ module.exports = {
 			} 
 
 			return gameState;
-		}
+		},
+		options: [
+		  { code: "K", text: "Keep listening"},
+		  { code: "D", text: "Dismantle the bulkhead"},
+			{ code: "I", text: "Ignore it"}
+		]
 	},
 	"2again": {
 		message: function (gameState) {

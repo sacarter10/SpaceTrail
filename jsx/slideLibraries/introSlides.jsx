@@ -150,19 +150,7 @@ module.exports = {
 			gameState.currentSlide = 4;
 
 			return gameState;
-		},
-		options: [
-			{ code: 1,
-				text: "One"},
-		  { code: 2,
-				text: "Two"},
-			{ code: 3,
-				text: "Three"},
-			{ code: 4,
-				text: "Four"},
-			{ code: 5,
-				text: "Five"},
-		]
+		}
 	},
 	4: {
 		message: function () {
@@ -260,13 +248,17 @@ module.exports = {
 		message: function (gameState) { 
 
 			return <span>
+			<h4>Prices</h4>
+			<ul>
+				<li><strong>Food:</strong> { gameState.currentSupplyPrices.food } / pound</li>
+				<li><strong>Oxygen:</strong> { gameState.currentSupplyPrices.oxygen } / liter</li>
+				<li><strong>Water:</strong> { gameState.currentSupplyPrices.fuel } / gallon</li>
+			  <li><strong>Fuel:</strong> { gameState.currentSupplyPrices.water } / gallon</li>
+			</ul>
 			<p>
 				What would you like to purchase?
 			</p>
-			<ul className="lettered-list">
-				<li>Water, { gameState.currentSupplyPrices.water } / gallon</li>
-				<li>I&apos;m happy with what I&apos;ve purchased.</li>
-			</ul>
+
 			</span>
 		},
 		handleInput: function (gameState, input) {
@@ -280,9 +272,11 @@ module.exports = {
 			return gameState;
 		},
 		options: [
-			{code: "A", text: function () { return "Food" + gameState.currentSupplyPrices.food + "/ pound"} }(),
-			{code: "B", text: "Oxygen, { gameState.currentSupplyPrices.oxygen } / liter"},
-			{code: "C", text: "Fuel, { gameState.currentSupplyPrices.fuel } / gallon"}
+			{code: "A", text: "Food" },
+			{code: "B", text: "Oxygen" },
+			{code: "C", text: "Fuel" },
+			{code: "D", text: "Water" },
+			{code: "E", text: "I'm happy with what I've purchased." }, 
 		]
 	},  
 	"8a": {
@@ -349,13 +343,16 @@ module.exports = {
 			gameState.currentSlide += 1;
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "A", text: "Continue" }
+		]
 	},
 	10: {
 		message: function (gameState, input) {
 			return <span>
 				<p>
-			 		It will take 200 days to reach your chosen asteroid.
+			 		It will take 200 days to reach your chosen asteroid. 
 			 	</p>
 			 	<p>
 			  	And you&apos;re off!
@@ -368,6 +365,9 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 33);
 
 			return updatedGameState;
-		}
+		},
+		options: [
+			{ code: "A", text: "Continue" }
+		]
 	}
 }
