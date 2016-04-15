@@ -21,9 +21,6 @@ module.exports = {
 					The message loops. From the transmission you determine that the <em>{ distressedShip }</em>&nbsp; 
 					is moving faster than you and will use { gallonsToCatchUp } gallons of fuel to catch up to and dock with.
 				</p>
-				<p>
-					Do you (r)eply, (d)ock, or (c)ontinue on your way?
-				</p>
 			</span>
 		},
 
@@ -39,7 +36,12 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "R", text: "Reply"},
+			{ code: "D", text: "Dock"},
+			{ code: "C", text: "Continue on your way"}
+		]
 	},
 	"1r": {
 		message: function (gameState) {
@@ -47,9 +49,6 @@ module.exports = {
 				<p>
 					There is no reply from the ship. The message continues to loop.
 				</p>
-				<p>
-					Do you (d)ock, or (c)ontinue?
-				</p> 
 			</span>
 		},
 		handleInput: function (gameState, input) {
@@ -62,7 +61,11 @@ module.exports = {
 			}
 
 			return gameState;
-		} 
+		},
+		options: [
+			{ code: "D", text: "Dock"},
+			{ code: "C", text: "Continue on your way"}
+		]
 	},
 	"1c": {
 		message: function () {
@@ -73,7 +76,10 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 40);
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		]
 	}, 
 	"1d": {
 		message: function (gameState) {
@@ -122,6 +128,9 @@ module.exports = {
 
 			return updatedGameState;
 		},
+		options: [
+			{ code: "C", text: "Continue"}
+		],
 		tempVars: {}
 	},
 	"2": {
@@ -129,9 +138,6 @@ module.exports = {
 			return <span>
 				<p>
 					You hear a knocking from inside one of the bulkheads. It lasts for a few seconds then is silent.
-				</p>
-				<p>
-					Do you (k)eep listening, (d)ismantle the bulkhead, or (i)gnore it?
 				</p>
 			</span>
 		},
@@ -149,7 +155,12 @@ module.exports = {
 			} 
 
 			return gameState;
-		}
+		},
+		options: [
+		  { code: "K", text: "Keep listening"},
+		  { code: "D", text: "Dismantle the bulkhead"},
+			{ code: "I", text: "Ignore it"}
+		]
 	},
 	"2again": {
 		message: function (gameState) {
@@ -158,7 +169,7 @@ module.exports = {
 					A few hours pass. You hear the knocking again. It lasts for a few seconds then is silent.
 				</p>
 				<p>
-					Do you (k)eep listening, (d)ismantle the bulkhead, or (i)gnore it?
+					What do you do?
 				</p>
 			</span>
 		}, 
@@ -180,6 +191,11 @@ module.exports = {
 
 			return gameState;
 		}, 
+		options: [
+			{ code: "K", text: "Keep listening"},
+			{ code: "D", text: "Dismantle the bulkhead"},
+			{ code: "I", text: "Ignore it and hope it goes away"}
+		],
 		tempVars: {
 			timesSeen: 0
 		}
@@ -199,7 +215,10 @@ module.exports = {
 			gameState.currentSlide = "2end";
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		],
 	}, 
 	"2unskilled": { 
 		message: function () {
@@ -210,7 +229,7 @@ module.exports = {
 					back on one of your wrenches is missing.
 				</p>
 				<p>
-					Do you (l)ook for it or (i)gnore it?
+					Do you look for it or ignore it?
 				</p>
 			</span>	
 		}, 
@@ -224,7 +243,11 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "L", text: "Look for it"},
+			{ code: "I", text: "Ignore it"}
+		]
 	},
 	"2findwrench": {
 		message: function () {
@@ -245,7 +268,10 @@ module.exports = {
 			gameState.currentSlide = "2end";
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		]
 	},
 	"2burst": {
 		message: function () {
@@ -263,7 +289,10 @@ module.exports = {
 			gameState.water -= 15;
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		]
 	},
 	"2end": {
 		message: function (gameState) {
@@ -276,7 +305,10 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 80);			
 
 			return updatedGameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		]
 	}, 
 	3: {
 		message: function (gameState) {
@@ -288,7 +320,7 @@ module.exports = {
 					Ahoy, this is { mysteryName } of the <em>{ mysteryShip }</em>.	
 				</p>
 				<p>
-					Do you (h)ail them back, or (i)gnore them?
+					Do you hail them back, or ignore them?
 				</p>
 			</span>
 		}, 
@@ -302,7 +334,11 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "H", text: "Hail them"},
+			{ code: "I", text: "Ignore them"}
+		]
 	},
 	"3a": {
 		message: function (gameState) {
@@ -319,7 +355,10 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 80);			
 
 			return updatedGameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		]
 	},
 	"3b": {
 		message: function (gameState) {
@@ -334,6 +373,8 @@ module.exports = {
 
 			return updatedGameState;
 		}	
-	}
-
+	},
+	options: [
+		{ code: "C", text: "Continue"}
+	]
 	}

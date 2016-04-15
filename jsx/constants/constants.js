@@ -20,7 +20,7 @@ module.exports = {
   ActionTypes: keyMirror({
     USER_INPUT: null,
     RESTART_GAME: null
-  })
+  }),
 } 
 
 

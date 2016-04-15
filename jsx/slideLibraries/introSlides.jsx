@@ -9,12 +9,15 @@ module.exports = {
 				Are you ready?
 			</p>;
 		}, 
-		inputPlaceholder: "Type enter to continue.",
 		handleInput: function (gameState, input) {
 			gameState.currentSlide += 1;
 
 			return gameState;
-		} 
+		},
+		options: [
+			{ code: "A",
+				text: "Yes" }
+		] 
 	},
 	1: { 
 		message: function () {
@@ -29,24 +32,21 @@ module.exports = {
 				</p>
 			</span> 
 		}, 
-		inputPlaceholder: "Type enter to continue.",
 		handleInput: function (gameState, input) {
 			gameState.currentSlide = gameState.currentSlide + 1;
 
 			return gameState;
-		} 		
+		},
+		options: [
+			{ code: "A",
+				text: "Continue"}
+		]  		
 	},
 
 	2: { 
 		message: function () {
 			return <span>
 			<p>You and your crew can choose from a background in the following:</p>
-			<ul className='numbered-list'>
-				<li>Programmer</li>
-				<li>Miner</li>
-				<li>Recently Unemployed Elevator Constructor</li>
-				<li>Explanation of Backgrounds</li>
-			</ul>
 			</span>
 		},		
 		handleInput: function(gameState, input) {
@@ -61,7 +61,17 @@ module.exports = {
 				gameState.currentSlide = "2a";
 			}
 			return gameState;
-		}
+		}, 
+		options: [
+			{ code: 1,
+				text: "Programmer"},
+			{ code: 2, 
+				text: "Miner"},
+			{ code: 3,
+		  	text: "Recently Unemployed Elevator Constructor"},
+		  { code: 4,
+				text: "Explanation of Backgrounds"}
+		] 
 	},
 
 	"2a": { 
@@ -94,7 +104,7 @@ module.exports = {
 			<li>
 				<em>Elevator Constructor</em>
 				<p>
-					The completion of the space elevator left you jobless and peniless. 
+					The completion of the space elevator left you jobless and penniless. 
 					You and your friends scrape together enough money to make a go at settling in 
 					the asteroid belt.
 				</p>
@@ -109,17 +119,14 @@ module.exports = {
 		handleInput: function(gameState, input) {
 			var numInput = parseInt(input);
 
-			if (numInput < 4) {
-				gameState.player.background = numInput;
-				gameState.money = Constants.startingMoneyByClass[gameState.player.background];
-				
-				gameState.currentSlide = 3;
-			} else {
-				gameState.currentSlide = "2a";
-			}
+			gameState.currentSlide = 2;
+			
 			return gameState;
-		}
-	},
+		},
+		options: [
+			{ code: "A",
+				text: "Back"},
+		] 	},
 	"3": {
 		message: function () {
 			return <span>
@@ -129,7 +136,7 @@ module.exports = {
 					the more food and fuel you will have to carry.
 				</p>
 				<p>
-				Choose from 1 to { Constants.maxPartySize } (this number includes you):
+				How many people are in your party (1 to 8)?:
 				</p>
 			</span>
 		},
@@ -151,7 +158,6 @@ module.exports = {
 				What is your name for this voyage?
 			</p>
 		},
-		inputPlaceholder: "Enter a name.",
 		handleInput: function(gameState, input){
 			gameState.player.name = input;
 			gameState.currentSlide +=1;
@@ -165,7 +171,6 @@ module.exports = {
 				What name do you give your ship?
 			</p>
 		},
-		inputPlaceholder: "Enter a name.",
 		handleInput: function(gameState, input) {
 			gameState.ship.name = input;	
 			gameState.currentSlide += 1;
@@ -189,7 +194,10 @@ module.exports = {
 			gameState.currentSlide += 1;	
 
 			return gameState;
-		}
+		},
+		options: [
+			{code: "A", text: "Continue"}
+		]
 	},
 	7: {
 		message: function (gameState) {			
@@ -231,22 +239,26 @@ module.exports = {
 			gameState.currentSlide += 1;
 
 			return gameState;
-		}
+		},
+		options: [
+			{code: "A", text: "Continue"}
+		]
 	},
 	8: {
 		message: function (gameState) { 
 
 			return <span>
+			<h4>Prices</h4>
+			<ul>
+				<li><strong>Food:</strong> { gameState.currentSupplyPrices.food } / pound</li>
+				<li><strong>Oxygen:</strong> { gameState.currentSupplyPrices.oxygen } / liter</li>
+				<li><strong>Water:</strong> { gameState.currentSupplyPrices.fuel } / gallon</li>
+			  <li><strong>Fuel:</strong> { gameState.currentSupplyPrices.water } / gallon</li>
+			</ul>
 			<p>
 				What would you like to purchase?
 			</p>
-			<ul className="lettered-list">
-				<li>Food, { gameState.currentSupplyPrices.food } / pound</li>
-				<li>Oxygen, { gameState.currentSupplyPrices.oxygen } / liter </li>
-				<li>Fuel, { gameState.currentSupplyPrices.fuel } / gallon</li>
-				<li>Water, { gameState.currentSupplyPrices.water } / gallon</li>
-				<li>I&apos;m happy with what I&apos;ve purchased.</li>
-			</ul>
+
 			</span>
 		},
 		handleInput: function (gameState, input) {
@@ -258,7 +270,14 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [
+			{code: "A", text: "Food" },
+			{code: "B", text: "Oxygen" },
+			{code: "C", text: "Fuel" },
+			{code: "D", text: "Water" },
+			{code: "E", text: "I'm happy with what I've purchased." }, 
+		]
 	},  
 	"8a": {
 		message: function () {
@@ -324,13 +343,16 @@ module.exports = {
 			gameState.currentSlide += 1;
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "A", text: "Continue" }
+		]
 	},
 	10: {
 		message: function (gameState, input) {
 			return <span>
 				<p>
-			 		It will take 200 days to reach your chosen asteroid.
+			 		It will take 200 days to reach your chosen asteroid. 
 			 	</p>
 			 	<p>
 			  	And you&apos;re off!
@@ -343,6 +365,9 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 33);
 
 			return updatedGameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue" }
+		]
 	}
 }

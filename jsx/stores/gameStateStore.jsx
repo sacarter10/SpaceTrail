@@ -42,7 +42,6 @@ var getNewGameState = function () {
 			oxygen: 20,
 			water: 15
 		},
-		didQuickStart: false,
 		daysToArrival: 200,
 		lengthOfTrip: 200,
 		food: 0, //unit = who really knows

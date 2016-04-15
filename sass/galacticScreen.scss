@@ -24,7 +24,7 @@ p, ul {
 	margin: 0 0 10px;
 }
 
-button {
+.double-border-button {
 	border: 1px solid $lightGreen;
 	background: transparent;
 	color: $lightGreen;
@@ -32,6 +32,7 @@ button {
 	cursor: pointer;
 	margin: 4px;
 
+	// double border
 	&::before {
 	  content: " ";
 	  position: absolute;
@@ -41,6 +42,27 @@ button {
 	  right: -4px;
 	  bottom: -4px;
 	  border: 1px solid $lightGreen;
+	}
+}
+
+.response-options {
+	margin: 10px 0;
+	list-style-type: none;
+	padding: 0;
+}
+
+.response-option {	
+	margin: 5px 0;
+
+	button {
+		border: 1px solid darken($lightGreen, 50%);
+		background: darken($lightGreen, 50%);
+		border-radius: 3px;
+		padding: 8px;
+		color: darken($lightGreen, 10%);
+		font-size: 14px;		
+		cursor: pointer;
+		font-family: Arial, sans-serif;
 	}
 }
 
