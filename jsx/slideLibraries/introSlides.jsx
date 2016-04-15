@@ -136,7 +136,7 @@ module.exports = {
 					the more food and fuel you will have to carry.
 				</p>
 				<p>
-				How many people are in your party (this number includes you)?:
+				How many people are in your party (1 to 8)?:
 				</p>
 			</span>
 		},
@@ -367,7 +367,7 @@ module.exports = {
 			return updatedGameState;
 		},
 		options: [
-			{ code: "A", text: "Continue" }
+			{ code: "C", text: "Continue" }
 		]
 	}
 }

@@ -15,7 +15,7 @@ module.exports = React.createClass({
 		return <span>
 			<form onSubmit={ this.handleSubmit }>
 				<input id="user-input" type="text" placeholder="Enter your input" autoFocus="true"/>
-				<button type="submit">Submit</button>
+				<button className="double-border-button" type="submit">Submit</button>
 			</form>
 		</span>
 	}

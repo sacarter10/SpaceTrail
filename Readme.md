@@ -1,6 +1,19 @@
-To run the server locally: "node server.js"  
+*Initial set-up*  
+- make sure Ruby is intalled  
+- `gem install sass` (required by grunt-contrib-sass library)  
+- `gem install compass` (required by grunt-contrib-sass) 
+
+- install node and use v1.0.0
+- `npm install`  
+
+
+*To Run*
 To compile sass and jsx one time: "grunt"  
-To compile and then watch for changes to sass/jsx: "grunt caw"  
+To compile and then watch for changes to sass/jsx: "grunt caw"   
+
+To run the server locally: "node server.js"  
+
+Open http://localhost:3000/ 
 
 Live here: http://lustforlassitude.com/galactic-opera/ 
 

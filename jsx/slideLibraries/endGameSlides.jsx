@@ -8,13 +8,12 @@ module.exports	= {
 				<p>At long last your journey has come to an end. Ahead lies your future home, asteroid #9298.</p>
 				<p>Do you scout the asteroid for the best place to land?</p> 
 				<p>(This will use one gallon of fuel, but increase your chances of landing successfully.)</p> 
-				<p>(y)es or (n)o</p>
 			</span>
 		},
 		handleInput: function (gameState, input) {
 			var firstLetter = input[0].toLowerCase();
 
-			if (firstLetter == 'y') {
+			if (firstLetter == 's') {
 				gameState.fuel -= 1;
 				gameState.currentSlide = "1b";
 
@@ -25,7 +24,11 @@ module.exports	= {
 
 				return gameState;
 			}
-		}
+		},
+		options: [
+			{ code: "S", text: "Scout the asteroid"},
+			{ code: "L", text: "Land where you are" }
+		]
 	},
 	"1b": {
 		message: function (gameState) {
@@ -43,7 +46,10 @@ module.exports	= {
 			}
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		]
 	},
 	"1c": {
 		message: function (gameState) {
@@ -61,7 +67,10 @@ module.exports	= {
 			}
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		]
 	},
 	"crashed": {
 		message: function (gameState) {
@@ -78,7 +87,10 @@ module.exports	= {
 			gameState.currentSlide = "dead";
 
 			return gameState;
-		}
+		},
+		options: [
+			{ code: "C", text: "Continue"}
+		]
 	},
 
 	"dead": {
@@ -89,7 +101,9 @@ module.exports	= {
 		},
 		handleInput: function (gameState, input) {					
 			return gameState;
-		}	
+		},
+		options: [
+		]	
 	},
 
 	"won": {
@@ -100,6 +114,8 @@ module.exports	= {
 		},
 		handleInput: function (gameState, input) {
 			return gameState;
-		}
+		},
+		options: [
+		]	
 	}
 }

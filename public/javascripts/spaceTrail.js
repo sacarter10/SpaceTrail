@@ -125,21 +125,21 @@ module.exports = React.createClass({
 var React = require('react');
 
 module.exports = React.createClass({
-	displayName: 'exports',
+	displayName: "exports",
 
 	render: function () {
 		var handleClick = this.props.handleClick;
 		var options = this.props.options;
 
 		return React.createElement(
-			'span',
-			null,
+			"ul",
+			{ className: "response-options" },
 			options.map(function (resp) {
 				return React.createElement(
-					'li',
-					{ key: resp.code },
+					"li",
+					{ className: "response-option", key: resp.code },
 					React.createElement(
-						'button',
+						"button",
 						{ onClick: handleClick.bind(null, resp.code) },
 						resp.text
 					)
@@ -223,7 +223,10 @@ module.exports = React.createClass({
 			),
 			React.createElement(
 				'button',
-				{ id: 'restartGame', onClick: this.handleRestart },
+				{ className: 'double-border-button',
+					id: 'restartGame',
+					style: { display: 'none' },
+					onClick: this.handleRestart },
 				'Restart Game'
 			)
 		);
@@ -256,7 +259,7 @@ module.exports = React.createClass({
 				React.createElement('input', { id: 'user-input', type: 'text', placeholder: 'Enter your input', autoFocus: 'true' }),
 				React.createElement(
 					'button',
-					{ type: 'submit' },
+					{ className: 'double-border-button', type: 'submit' },
 					'Submit'
 				)
 			)
@@ -412,7 +415,7 @@ module.exports = {
 
 			return gameState;
 		},
-		options: [{ code: "C", text: "Continue on your way" }]
+		options: [{ code: "C", text: "Continue" }]
 	},
 	"1d": {
 		message: function (gameState) {
@@ -539,7 +542,7 @@ module.exports = {
 				React.createElement(
 					'p',
 					null,
-					'Do you (k)eep listening, (d)ismantle the bulkhead, or (i)gnore it?'
+					'What do you do?'
 				)
 			);
 		},
@@ -562,6 +565,7 @@ module.exports = {
 
 			return gameState;
 		},
+		options: [{ code: "K", text: "Keep listening" }, { code: "D", text: "Dismantle the bulkhead" }, { code: "I", text: "Ignore it and hope it goes away" }],
 		tempVars: {
 			timesSeen: 0
 		}
@@ -587,7 +591,8 @@ module.exports = {
 			gameState.currentSlide = "2end";
 
 			return gameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue" }]
 	},
 	"2unskilled": {
 		message: function () {
@@ -602,7 +607,7 @@ module.exports = {
 				React.createElement(
 					'p',
 					null,
-					'Do you (l)ook for it or (i)gnore it?'
+					'Do you look for it or ignore it?'
 				)
 			);
 		},
@@ -616,7 +621,8 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [{ code: "L", text: "Look for it" }, { code: "I", text: "Ignore it" }]
 	},
 	"2findwrench": {
 		message: function () {
@@ -639,7 +645,8 @@ module.exports = {
 			gameState.currentSlide = "2end";
 
 			return gameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue" }]
 	},
 	"2burst": {
 		message: function () {
@@ -663,7 +670,8 @@ module.exports = {
 			gameState.water -= 15;
 
 			return gameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue" }]
 	},
 	"2end": {
 		message: function (gameState) {
@@ -678,7 +686,8 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 80);
 
 			return updatedGameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue" }]
 	},
 	3: {
 		message: function (gameState) {
@@ -704,7 +713,7 @@ module.exports = {
 				React.createElement(
 					'p',
 					null,
-					'Do you (h)ail them back, or (i)gnore them?'
+					'Do you hail them back, or ignore them?'
 				)
 			);
 		},
@@ -718,7 +727,8 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [{ code: "H", text: "Hail them" }, { code: "I", text: "Ignore them" }]
 	},
 	"3a": {
 		message: function (gameState) {
@@ -749,7 +759,8 @@ module.exports = {
 			var updatedGameState = Helpers.advanceNDays(gameState, 80);
 
 			return updatedGameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue" }]
 	},
 	"3b": {
 		message: function (gameState) {
@@ -768,8 +779,8 @@ module.exports = {
 
 			return updatedGameState;
 		}
-	}
-
+	},
+	options: [{ code: "C", text: "Continue" }]
 };
 
 },{"./helpers.js":12,"react":178}],11:[function(require,module,exports){
@@ -795,18 +806,13 @@ module.exports = {
 					'p',
 					null,
 					'(This will use one gallon of fuel, but increase your chances of landing successfully.)'
-				),
-				React.createElement(
-					'p',
-					null,
-					'(y)es or (n)o'
 				)
 			);
 		},
 		handleInput: function (gameState, input) {
 			var firstLetter = input[0].toLowerCase();
 
-			if (firstLetter == 'y') {
+			if (firstLetter == 's') {
 				gameState.fuel -= 1;
 				gameState.currentSlide = "1b";
 
@@ -817,7 +823,8 @@ module.exports = {
 
 				return gameState;
 			}
-		}
+		},
+		options: [{ code: "S", text: "Scout the asteroid" }, { code: "L", text: "Land where you are" }]
 	},
 	"1b": {
 		message: function (gameState) {
@@ -837,7 +844,8 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue" }]
 	},
 	"1c": {
 		message: function (gameState) {
@@ -857,7 +865,8 @@ module.exports = {
 			}
 
 			return gameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue" }]
 	},
 	"crashed": {
 		message: function (gameState) {
@@ -880,7 +889,8 @@ module.exports = {
 			gameState.currentSlide = "dead";
 
 			return gameState;
-		}
+		},
+		options: [{ code: "C", text: "Continue" }]
 	},
 
 	"dead": {
@@ -893,7 +903,8 @@ module.exports = {
 		},
 		handleInput: function (gameState, input) {
 			return gameState;
-		}
+		},
+		options: []
 	},
 
 	"won": {
@@ -906,7 +917,8 @@ module.exports = {
 		},
 		handleInput: function (gameState, input) {
 			return gameState;
-		}
+		},
+		options: []
 	}
 };
 
@@ -1146,7 +1158,7 @@ module.exports = {
 				React.createElement(
 					'p',
 					null,
-					'How many people are in your party (this number includes you)?:'
+					'How many people are in your party (1 to 8)?:'
 				)
 			);
 		},
@@ -1504,7 +1516,7 @@ module.exports = {
 
 			return updatedGameState;
 		},
-		options: [{ code: "A", text: "Continue" }]
+		options: [{ code: "C", text: "Continue" }]
 	}
 };
 
@@ -1553,7 +1565,6 @@ var getNewGameState = function () {
 			oxygen: 20,
 			water: 15
 		},
-		didQuickStart: false,
 		daysToArrival: 200,
 		lengthOfTrip: 200,
 		food: 0, //unit = who really knows

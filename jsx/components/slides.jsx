@@ -33,7 +33,10 @@ module.exports = React.createClass({
 
 				{ userInput }
 			</div>
-			<button id="restartGame" onClick={ this.handleRestart }>Restart Game</button>
+			<button className="double-border-button" 
+							id="restartGame"
+							style={ {display: 'none'} }
+							onClick={ this.handleRestart }>Restart Game</button>
 		</div>
 	}
 });
